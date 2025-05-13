@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('contact.index');
     }
+
+    public function profile()
+    {
+        return view('custom-dashboard');
+    }
+
+    public function login()
+    {
+        return view('auth.custom-login');
+    }
 }

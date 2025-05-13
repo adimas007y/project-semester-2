@@ -1,83 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perpustakaan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Buku</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <style>
-        .navbar-brand img {
-            height: 40px;
+        body {
+            background-color: #f8f9fa;
         }
-        .card img {
-            height: 200px;
-            object-fit: cover;
+
+        .page-header {
+            background: linear-gradient(135deg, #0d6efd, #6610f2);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-type {
+            font-size: 0.75rem;
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-outline-primary {
+            transition: 0.3s;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .icon-book {
+            font-size: 2rem;
+            color: #0d6efd;
         }
     </style>
 </head>
+
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <header class="page-header">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://via.placeholder.com/150x40" alt="Logo Perpustakaan">
-                Perpustakaan
-            </a>
+            <h1 class="display-5 fw-bold"><i class="bi bi-journal-bookmark-fill me-2"></i>Daftar Buku</h1>
         </div>
-    </nav>
+    </header>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Selamat Datang di Perpustakaan</h1>
-
-        <!-- Search Bar -->
-        <div class="row mb-4">
-            <div class="col-md-6 offset-md-3">
-                <form action="#" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari buku..." name="search">
-                        <button class="btn btn-primary" type="submit">Cari</button>
-                    </div>
-                </form>
+    <div class="container">
+        @if ($books->isEmpty())
+            <div class="alert alert-warning text-center" role="alert">
+                Tidak ada buku tersedia.
             </div>
-        </div>
-
-        <!-- Daftar Buku -->
-        <div class="row">
-            <!-- Contoh Buku 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Buku 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Judul Buku 1</h5>
-                        <p class="card-text">Deskripsi singkat tentang buku 1.</p>
-                        <a href="#" class="btn btn-primary">Detail</a>
+        @else
+            <div class="row">
+                @foreach ($books as $book)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-2">
+                                    <i class="bi bi-book icon-book"></i>
+                                </div>
+                                <h5 class="card-title text-primary">{{ $book->judul }}</h5>
+                                <p class="card-text mb-1"><strong>Penerbit:</strong> {{ $book->penerbit }}</p>
+                                <p class="card-text mb-1"><strong>Penulis:</strong> {{ $book->pencipta }}</p>
+                                <span class="badge badge-type align-self-start mb-3">{{ $book->type }}</span>
+                                <div class="mt-auto">
+                                    <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Detail</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            <!-- Contoh Buku 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Buku 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Judul Buku 2</h5>
-                        <p class="card-text">Deskripsi singkat tentang buku 2.</p>
-                        <a href="#" class="btn btn-primary">Detail</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Contoh Buku 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Buku 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Judul Buku 3</h5>
-                        <p class="card-text">Deskripsi singkat tentang buku 3.</p>
-                        <a href="#" class="btn btn-primary">Detail</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
