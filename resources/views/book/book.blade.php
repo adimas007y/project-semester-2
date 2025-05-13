@@ -78,7 +78,10 @@
                                 <p class="card-text mb-1"><strong>Penulis:</strong> {{ $book->pencipta }}</p>
                                 <span class="badge badge-type align-self-start mb-3">{{ $book->type }}</span>
                                 <div class="mt-auto">
-                                    <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Detail</a>
+                                    <a href="{{ asset('storage/' . $book->file_path) }}" target="_blank"
+                                        class="btn btn-outline-primary btn-sm w-100">
+                                        Lihat Buku
+                                    </a>
                                 </div>
                             </div>
                         </div>
